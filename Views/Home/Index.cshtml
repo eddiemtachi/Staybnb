@@ -1,0 +1,9 @@
+@model IEnumerable<Property>
+@{ ViewData["Title"] = "Explore stays"; }
+<section class="hero"><h1>Find a place that feels like home.</h1><p>Discover stays, request bookings, and manage your own property.</p>
+<form method="get" class="filters"><input name="city" value="@ViewBag.City" placeholder="City" /><select name="propertyType"><option value="">All property types</option>@foreach (var t in new[]{"Apartment","House","Guesthouse","Cottage","Room"}) { <option selected="@(ViewBag.PropertyType as string == t)" value="@t">@t</option> }</select><button>Search</button></form></section>
+<div class="cards">@foreach (var p in Model) { <article class="property">
+@if (p.Images.FirstOrDefault() is { } img) { <img src="@img.ImageUrl" alt="@p.Title" onerror="this.style.display='none'" /> } else { <div class="placeholder">Staybnb</div> }
+<div class="pad"><span class="muted">@p.City · @p.PropertyType</span><h2>@p.Title</h2><p>@(p.Description.Length > 130 ? p.Description[..130] + "…" : p.Description)</p><strong>R @p.PricePerNight.ToString("N2") / night</strong>
+@if (User.Identity?.IsAuthenticated == true && User.IsInRole("Guest")) { <a class="button" asp-controller="Guest" asp-action="Book" asp-route-id="@p.Id">Request booking</a> }</div></article> }</div>
+@if (!Model.Any()) { <p>No active properties match your search yet. Register and apply to become a host.</p> }

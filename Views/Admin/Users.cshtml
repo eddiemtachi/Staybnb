@@ -1,0 +1,3 @@
+@model IEnumerable<ApplicationUser>
+@{ ViewData["Title"] = "User management"; }
+<h1>User management (SuperAdmin only)</h1><table><thead><tr><th>Name</th><th>Email</th><th>Action</th></tr></thead><tbody>@foreach (var u in Model) { <tr><td>@u.FullName</td><td>@u.Email</td><td><form asp-action="PromoteToAdmin" method="post">@Html.AntiForgeryToken()<input type="hidden" name="userId" value="@u.Id" /><button>Promote to Admin</button></form></td></tr> }</tbody></table>

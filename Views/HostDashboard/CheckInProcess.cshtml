@@ -1,0 +1,5 @@
+@model CheckInProcess
+@{ ViewData["Title"] = "Check-in rules"; }
+<h1>Check-in instructions</h1><form method="post" class="form">@Html.AntiForgeryToken()<input type="hidden" asp-for="PropertyId" />
+<label asp-for="Rules">Check-in rules</label><textarea asp-for="Rules"></textarea><span asp-validation-for="Rules"></span>
+<label asp-for="RequiredDocuments">Required documents</label><textarea asp-for="RequiredDocuments"></textarea><button>Save instructions</button></form>

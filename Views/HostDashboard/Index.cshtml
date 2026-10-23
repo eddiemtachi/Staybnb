@@ -1,0 +1,7 @@
+@model IEnumerable<Property>
+@{ ViewData["Title"] = "Host dashboard"; }
+<h1>Host dashboard</h1><p><a asp-action="Bookings">View booking requests</a></p>
+<table><thead><tr><th>Property</th><th>City</th><th>Price/night</th><th>Active</th><th>Actions</th></tr></thead><tbody>
+@foreach (var p in Model) { <tr><td>@p.Title</td><td>@p.City</td><td>R @p.PricePerNight.ToString("N2")</td><td>@p.IsActive</td><td>
+<form asp-action="ToggleActive" method="post">@Html.AntiForgeryToken()<input type="hidden" name="id" value="@p.Id" /><button>Toggle active</button></form>
+<a asp-action="CheckInProcess" asp-route-propertyId="@p.Id">Check-in rules</a></td></tr> }</tbody></table>

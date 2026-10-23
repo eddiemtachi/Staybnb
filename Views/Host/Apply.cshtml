@@ -1,0 +1,13 @@
+@model HostApplication
+@{ ViewData["Title"] = "Become a host"; }
+<h1>Apply to become a host</h1><p>Complete the property details and provide at least one image URL. An administrator must approve your application.</p>
+<form method="post" class="form">@Html.AntiForgeryToken()<div asp-validation-summary="All" class="error"></div>
+<label asp-for="Title"></label><input asp-for="Title" /><span asp-validation-for="Title"></span>
+<label asp-for="Description"></label><textarea asp-for="Description"></textarea><span asp-validation-for="Description"></span>
+<label asp-for="Address"></label><input asp-for="Address" /><span asp-validation-for="Address"></span>
+<label asp-for="City"></label><input asp-for="City" /><span asp-validation-for="City"></span>
+<label asp-for="PropertyType"></label><select asp-for="PropertyType"><option>Apartment</option><option>House</option><option>Guesthouse</option><option>Cottage</option><option>Room</option></select>
+<label asp-for="PricePerNight"></label><input asp-for="PricePerNight" type="number" step=".01" /><span asp-validation-for="PricePerNight"></span>
+<label asp-for="CleaningFee"></label><input asp-for="CleaningFee" type="number" step=".01" />
+<label asp-for="ServiceFee"></label><input asp-for="ServiceFee" type="number" step=".01" />
+<label asp-for="ImageUrl">Property image URL (required)</label><input asp-for="ImageUrl" placeholder="https://example.com/property.jpg" /><span asp-validation-for="ImageUrl"></span><button>Submit application</button></form>

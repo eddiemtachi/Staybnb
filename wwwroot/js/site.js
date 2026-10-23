@@ -1,0 +1,1 @@
+// Keep client-side JavaScript small; server-side validation remains authoritative.

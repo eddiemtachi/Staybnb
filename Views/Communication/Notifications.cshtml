@@ -1,0 +1,3 @@
+@model IEnumerable<Notification>
+@{ ViewData["Title"] = "Notifications"; }
+<h1>Notifications</h1>@if (!Model.Any()) { <p>You have no notifications.</p> }<ul class="notifications">@foreach (var n in Model) { <li><span>@n.Text</span><small>@n.CreatedAt.ToLocalTime() · @(n.IsRead ? "Read" : "Unread")</small></li> }</ul>

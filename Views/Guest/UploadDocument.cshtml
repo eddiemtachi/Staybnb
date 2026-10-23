@@ -1,0 +1,6 @@
+@model GuestDocument
+@{ ViewData["Title"] = "Guest check-in document"; }
+<h1>Guest check-in document</h1><p>For demonstration purposes, enter a secure private file URL. Do not use a public URL for real identity documents.</p>
+<form method="post" class="form">@Html.AntiForgeryToken()<div asp-validation-summary="All" class="error"></div><input type="hidden" asp-for="BookingId" />
+<label asp-for="DocumentType"></label><select asp-for="DocumentType"><option>ID</option><option>Passport</option></select>
+<label asp-for="DocumentUrl">Document URL</label><input asp-for="DocumentUrl" /><span asp-validation-for="DocumentUrl"></span><button>Submit for host review</button></form>

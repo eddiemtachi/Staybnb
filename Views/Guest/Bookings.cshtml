@@ -1,0 +1,4 @@
+@model IEnumerable<Booking>
+@{ ViewData["Title"] = "My bookings"; }
+<h1>My bookings</h1><table><thead><tr><th>Property</th><th>Dates</th><th>Guests</th><th>Total</th><th>Status</th><th>Check-in</th></tr></thead><tbody>
+@foreach (var b in Model) { <tr><td>@b.Property?.Title</td><td>@b.CheckIn.ToString("d") – @b.CheckOut.ToString("d")</td><td>@b.Travelers</td><td>R @b.TotalPrice.ToString("N2")</td><td>@b.Status</td><td>@if (b.Status == "Approved") { <a asp-action="UploadDocument" asp-route-bookingId="@b.Id">Upload guest document</a> }</td></tr> }</tbody></table>

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>@ViewData["Title"] - Staybnb</title><link rel="stylesheet" href="~/css/site.css" /></head>
+<body><header><a class="brand" asp-controller="Home" asp-action="Index">Staybnb</a><nav>
+<a asp-controller="Home" asp-action="Index">Explore</a>
+@if (User.Identity?.IsAuthenticated == true) {
+<a asp-controller="Guest" asp-action="Bookings">My bookings</a><a asp-controller="Communication" asp-action="Inbox">Inbox</a><a asp-controller="Communication" asp-action="Notifications">Notifications</a>
+@if (User.IsInRole("Guest")) { <a asp-controller="Host" asp-action="Apply">Become a host</a> }
+@if (User.IsInRole("Host")) { <a asp-controller="HostDashboard" asp-action="Index">Host dashboard</a> }
+@if (User.IsInRole("Admin") || User.IsInRole("SuperAdmin")) { <a asp-controller="Admin" asp-action="Index">Admin</a> }
+<form asp-controller="Account" asp-action="Logout" method="post" class="inline"><button type="submit">Log out</button></form>
+} else { <a asp-controller="Account" asp-action="Login">Log in</a><a asp-controller="Account" asp-action="Register">Sign up</a> }
+</nav></header><main class="container">
+@if (TempData["Message"] != null) { <p class="success">@TempData["Message"]</p> }
+@if (TempData["Error"] != null) { <p class="error">@TempData["Error"]</p> }
+@RenderBody()
+</main><footer>Staybnb · A student demonstration property rental platform</footer>
+<script src="~/js/site.js"></script>@await RenderSectionAsync("Scripts", required: false)</body></html>

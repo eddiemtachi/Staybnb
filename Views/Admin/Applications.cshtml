@@ -1,0 +1,4 @@
+@model IEnumerable<HostApplication>
+@{ ViewData["Title"] = "Host applications"; }
+<h1>Host applications</h1><table><thead><tr><th>Applicant</th><th>Property</th><th>City</th><th>Price</th><th>Image</th><th>Status</th><th>Review</th></tr></thead><tbody>
+@foreach (var a in Model) { <tr><td>@a.User?.Email</td><td>@a.Title</td><td>@a.City</td><td>R @a.PricePerNight.ToString("N2")</td><td><a href="@a.ImageUrl" target="_blank" rel="noopener">View image</a></td><td>@a.Status</td><td>@if (a.Status == "Pending") { foreach (var d in new[]{"Approved","Rejected"}) { <form asp-action="ReviewApplication" method="post" class="inline">@Html.AntiForgeryToken()<input type="hidden" name="id" value="@a.Id" /><input type="hidden" name="decision" value="@d" /><button>@d</button></form> } }</td></tr> }</tbody></table>

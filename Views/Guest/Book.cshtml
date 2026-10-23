@@ -1,0 +1,7 @@
+@model Booking
+@{ ViewData["Title"] = "Request booking"; var p = ViewBag.Property as Property; }
+<h1>Request a stay</h1><h2>@p?.Title</h2><p>R @p?.PricePerNight.ToString("N2") per night · Cleaning fee R @p?.CleaningFee.ToString("N2") · Service fee R @p?.ServiceFee.ToString("N2")</p>
+<form method="post" class="form">@Html.AntiForgeryToken()<div asp-validation-summary="All" class="error"></div><input type="hidden" asp-for="PropertyId" />
+<label asp-for="CheckIn">Check-in</label><input asp-for="CheckIn" type="date" /><label asp-for="CheckOut">Check-out</label><input asp-for="CheckOut" type="date" />
+<label asp-for="Travelers">Number of travellers</label><input asp-for="Travelers" type="number" min="1" max="30" /><button>Calculate total and request</button></form>
+<p>Total is calculated on the server: (price per night × nights) + cleaning fee + service fee.</p>

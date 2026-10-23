@@ -1,0 +1,4 @@
+@model IEnumerable<Message>
+@{ ViewData["Title"] = "Inbox"; }
+<h1>Inbox and sent messages</h1><form asp-action="Send" method="post" class="form"><h2>Send a message</h2><label>Recipient user ID</label><input name="recipientId" required /><label>Message</label><textarea name="body" maxlength="2000" required></textarea><button>Send</button></form>
+<table><thead><tr><th>Date</th><th>From</th><th>To</th><th>Message</th><th>Read</th></tr></thead><tbody>@foreach (var m in Model) { <tr><td>@m.SentAt.ToLocalTime()</td><td>@m.Sender?.Email</td><td>@m.Recipient?.Email</td><td>@m.Body</td><td>@m.IsRead</td></tr> }</tbody></table>

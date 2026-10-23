@@ -1,0 +1,4 @@
+@model LoginViewModel
+@{ ViewData["Title"] = "Log in"; }
+<h1>Welcome back</h1><form method="post" class="form">@Html.AntiForgeryToken()<div asp-validation-summary="All" class="error"></div>
+<label asp-for="Email"></label><input asp-for="Email" /><span asp-validation-for="Email"></span><label asp-for="Password"></label><input asp-for="Password" /><span asp-validation-for="Password"></span><input type="hidden" name="returnUrl" value="@ViewBag.ReturnUrl" /><button>Log in</button></form>
